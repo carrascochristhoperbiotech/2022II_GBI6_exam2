@@ -1,0 +1,25 @@
+# Escriba aquí su código para el ejercicio 3
+##############Primera funcion
+def fasta_downloader(arch= 'coati.txt'):
+    """
+    
+    """
+    from Bio import Entrez 
+    from Bio import SeqIO 
+    id_coati=[]
+    rep= []
+    with open('C:/Users/Usuario/Documents/GitHub/2022II_GBI6_exam2/data/coati.txt') as coat:
+        line = coat.readline()
+        for i in coat:
+            rep = i.replace('\n','')
+            id_coati.append(rep)
+        ##Entrar a la web
+    Entrez.email = "cristhoplay@gmail.com" 
+    with Entrez.efetch( db="nucleotide", rettype="gb", retmode="text", id= id_coati
+                  ) as handle: 
+        coati= []
+        for seq_record in SeqIO.parse(handle, "gb"): 
+            coati.append(seq_record)
+    SeqIO.write(coati, "data/coati.gb", "genbank")
+
+
